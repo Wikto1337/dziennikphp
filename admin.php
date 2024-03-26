@@ -27,36 +27,37 @@ if($_SESSION['upr']!='admin'){
             <option value="teacher">teacher</option>
             <option value="user">user</option>
         </select><br>
-        <input type="text" name="changeupr" id="changeupr" placeholder="type a login"><br>
+        <?php
+            $host="localhost";
+            $dbuser="root";
+            $dbpassword="";
+            $dbname="project";
+
+            $conn=mysqli_connect($host,$dbuser,$dbpassword,$dbname);
+
+            if(!$conn){
+                die (mysqli_connect_error() . "error");
+            }
+
+            $odczytadmin = "SELECT * FROM users";
+            $result = mysqli_query($conn, $odczytadmin);    
+
+            if (mysqli_num_rows($result) > 0) {
+                echo "<select name='changeupr' id='changeupr'>";
+                while($row = mysqli_fetch_assoc($result)) {
+                    echo "<option>" . $row["login"] . "</option>";
+                }; echo "</select>";
+            };
+        ?><br>
         <button type="submit">change</button><br>
     </form>
 
     <?php
-        $host="localhost";
-        $dbuser="root";
-        $dbpassword="";
-        $dbname="project";
-
-        $conn=mysqli_connect($host,$dbuser,$dbpassword,$dbname);
-
-        if(!$conn){
-            die (mysqli_connect_error() . "error");
-        }
-
-        $odczytadmin = "SELECT * FROM users";
-        $result = mysqli_query($conn, $odczytadmin);
-
-        if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_assoc($result)) {
-                echo "<li>" . $row["login"];
-            }; 
-        };
 
     if(isset($_POST["changeupr"]) && isset($_POST["uprawnienia"])){    
         $changed = $_POST["uprawnienia"];
 
         $pickid = $_POST["changeupr"];
-
 
         $zmienupr = "UPDATE users SET upr='$changed' WHERE login='$pickid'";
 
