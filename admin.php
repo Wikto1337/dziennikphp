@@ -71,36 +71,46 @@ if($_SESSION['upr']!='admin'){
     }
     ?>
         <form action="admin.php" method="post">
-            <label for="changeupr">kogo chcesz usunac</label><br>
-            <input type="text" name="usun" id="usun" placeholder="type a login"><br>
-            <button type="submit">delete</button><br>
-        </form>
-    <?php
+            <label for="changeupr">kogo chcesz usunac?</label><br>
+            <?php
+            $host="localhost";
+            $dbuser="root";
+            $dbpassword="";
+            $dbname="project";
 
-        $host="localhost";
-        $dbuser="root";
-        $dbpassword="";
-        $dbname="project";
+            $conn=mysqli_connect($host,$dbuser,$dbpassword,$dbname);
 
-        $conn=mysqli_connect($host,$dbuser,$dbpassword,$dbname);
+            if(!$conn){
+                die (mysqli_connect_error() . "error");
+            }
 
-        if(!$conn){
-            die (mysqli_connect_error() . "error");
-        }
+            $odczytadmin = "SELECT * FROM users";
+            $result = mysqli_query($conn, $odczytadmin);    
 
-
-    if(isset($_POST["changeup"]) && isset($_POST["usun"])){
-        $deletepick = $_POST["usun"];
-
-        $delete = "DELETE FROM users WHERE login='$deletepick'";
-
-        if (mysqli_query($conn, $delete)) {
-          echo "Record deleted successfully";
-        } else {
-          echo "Error deleting record: " . mysqli_error($conn);
-}
+            if (mysqli_num_rows($result) > 0) {
+                echo "<select name='usun' id='usun'>";
+                while($row = mysqli_fetch_assoc($result)) {
+                    echo "<option>" . $row["login"] . "</option>";
+                }; echo "</select>";
+            };
+            if(!$conn){
+                die (mysqli_connect_error() . "error");
+            }
+    
+    
+        if(isset($_POST["usun"])){
+            $deletepick = $_POST["usun"];
+    
+            $delete = "DELETE FROM users WHERE login='$deletepick'";
+    
+            if (mysqli_query($conn, $delete)) {
+              echo "Record deleted successfully";
+            } else {
+              echo "Error deleting record: " . mysqli_error($conn);
     }
-    mysqli_close($conn);
-        ?>
+        }
+            ?><br>
+            <button type="submit">delete</button>
+        </form>
 </body>
 </html>

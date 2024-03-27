@@ -18,7 +18,7 @@ if($_SESSION['upr']!='admin' && $_SESSION['upr']!='teacher'){
     <?php
         include './menu.php'
     ?>
-    <form action="" method="post">
+    <form action="oceny.php" method="post">
         <select name="grades" id="grades">
             <option value="1">1</option>
             <option value="1+">1+</option>
@@ -37,11 +37,7 @@ if($_SESSION['upr']!='admin' && $_SESSION['upr']!='teacher'){
             <option value="6-">6-</option>
             <option value="6">6</option>
         </select><br>
-        <input type="text" name="uczen" id="uczen"><br>
-        <button type="submit">wstaw</button>
-    </form>
-
-    <?php
+        <?php
         $host="localhost";
         $dbuser="root";
         $dbpassword="";
@@ -49,12 +45,50 @@ if($_SESSION['upr']!='admin' && $_SESSION['upr']!='teacher'){
 
         $conn=mysqli_connect($host,$dbuser,$dbpassword,$dbname);
 
-        $grade = $_POST["grades"];
-        $uczen = $_POST["uczen"];
+        if(!$conn){
+            die (mysqli_connect_error() . "error");
+        }
 
-        $wstawocene = "INSERT INTO oceny"
+        $odczytadmin = "SELECT * FROM users WHERE upr='user'";
+        $result = mysqli_query($conn, $odczytadmin);    
 
+        if (mysqli_num_rows($result) > 0) {
+            echo "<select name='uczen' id='uczen'>";
+            while($row = mysqli_fetch_assoc($result)) {
+                echo "<option>" . $row["login"] . "</option>";
+            }; echo "</select>";
+        };
+        ?><br>
+        <input type="text" name="opis" id="opis" placeholder="type an opis"><br>
+        <input type="text" name="przedmiot" id="przedmiot" placeholder="type a przedmiot"><br>
+        <button type="submit">wstaw</button>
+    </form>
 
+    <?php 
+    $host="localhost";
+    $dbuser="root";
+    $dbpassword="";
+    $dbname="project";
+
+    $conn=mysqli_connect($host,$dbuser,$dbpassword,$dbname);
+
+    if(!$conn){
+        die (mysqli_connect_error() . "error");
+    }
+    if(isset($_POST["uczen"]) && isset($_POST["grades"]) && isset($_POST["opis"]) && isset($_POST["przedmiot"])){ 
+    $uczen = $_POST["uczen"];
+    $grade = $_POST["grades"];
+    $opis = $_POST["opis"];
+    $przedmiot = $_POST["przedmiot"];
+
+    $wstawocene = "INSERT INTO oceny(login, ocena, opis, przedmiot) VALUES ('$uczen', '$grade', '$opis', '$przedmiot')";
+    
+    if (mysqli_query($conn, $wstawocene)) {
+        echo "new grade added";
+      } else {
+        echo "Error: " . $wstawocene . "<br>" . mysqli_error($conn);
+      }
+    }
     ?>
 </body>
 </html>
