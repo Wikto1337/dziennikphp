@@ -9,7 +9,7 @@ session_start();
     <title>LOGIN</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="body">
     <h1>LOGIN</h1>
     <form action="login.php" method="POST" id="form">
         <input type="text" name="login" id="login" placeholder="login"><br>

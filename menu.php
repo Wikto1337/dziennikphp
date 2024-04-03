@@ -3,31 +3,21 @@ echo "logged user: ";
 echo $_SESSION['user'];
 
 ?>
-<ul>
 
 <?php 
     if($_SESSION['upr']=='teacher'){
-        echo "<div> <a href='/project/oceny.php'>OCENY</a> </div>";
+        echo "<a href='/dziennikphp/oceny.php'>OCENY</a>";
+        echo "<a href='/dziennikphp/logout.php'>LOG OUT</a>";
     }
     
 ?>
 
 <?php
 if($_SESSION['upr']=='admin'){
-    echo "<div> <a href='/project/admin.php'>ADMIN</a> </div>";
-    echo "<div> <a href='/project/rejestracja.php'>ADD NEW USER</a> </div>";
-    echo "<div> <a href='/project/oceny.php'>OCENY</a> </div>";
+
+    echo "<a href='/dziennikphp/admin.php'>ADMIN</a>";
+    echo "<a href='/dziennikphp/rejestracja.php'>ADD NEW USER</a>";
+    echo "<a href='/dziennikphp/oceny.php'>OCENY</a>";
+    echo "<a href='/dziennikphp/logout.php'>LOG OUT</a>";
 }
 ?>
-
-
-<?php
-if($_SESSION['zalogowano']){
-    echo "<div> <a href='/project/logout.php'>LOG OUT</a> </div>";
-} else {
-    echo "<div> <a href='/project/login.php'>LOGIN</a> </div>";
-}
-?>
-
-
-</ul>

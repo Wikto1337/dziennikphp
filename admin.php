@@ -12,10 +12,11 @@ if($_SESSION['upr']!='admin'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADMIN</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>ADMIN</h1>
+<body id="body_admin">
 
+    <div id="menu_admin"><h1>ADMIN</h1></div>
     <?php 
         include './menu.php';
     ?>

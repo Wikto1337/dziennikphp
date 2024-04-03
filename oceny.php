@@ -11,7 +11,8 @@ if($_SESSION['upr']!='admin' && $_SESSION['upr']!='teacher'){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>oceny</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>OCENY</h1>
@@ -81,7 +82,7 @@ if($_SESSION['upr']!='admin' && $_SESSION['upr']!='teacher'){
     $opis = $_POST["opis"];
     $przedmiot = $_POST["przedmiot"];
 
-    $wstawocene = "INSERT INTO oceny(login, ocena, opis, przedmiot) VALUES ('$uczen', '$grade', '$opis', '$przedmiot')";
+    $wstawocene = "INSERT INTO oceny(login, ocena, opis, przedmiot, nauczyciel) VALUES ('$uczen', '$grade', '$opis', '$przedmiot', '$_SESSION[user]')";
     
     if (mysqli_query($conn, $wstawocene)) {
         echo "new grade added";

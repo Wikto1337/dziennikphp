@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USER</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
         <h1>USER</h1>
@@ -27,15 +28,16 @@
                 die (mysqli_connect_error() . "error");
             }
             $logged = $_SESSION['user'];
-            $seegrade = "SELECT ocena, opis, przedmiot FROM oceny WHERE login = '$logged'";
+            $seegrade = "SELECT ocena, opis, przedmiot, nauczyciel FROM oceny WHERE login = '$logged'";
 
             $rezultat = mysqli_query($conn, $seegrade);
 
             if (mysqli_num_rows($rezultat) > 0) {
-                echo "oceny: " . "<br>";
+                echo "oceny: " . "<br>" . 
+                "--------------------------------------------" . "<br>";
                 while($row = mysqli_fetch_assoc($rezultat)) {
-                  echo $row['ocena'] . "    |" . $row['opis'] . "| " . "     |" .  $row["przedmiot"] . "|" ."<br>" .
-                  "-----------------------------------------" . "<br>";
+                  echo $row['ocena'] . "    |" . $row['opis'] . "| " . "     |" .  $row["przedmiot"] . "|   " . "nauczyciel: " . $row['nauczyciel'] . "|" . "<br>" .
+                  "--------------------------------------------" . "<br>";
                 }
               }
         ?>

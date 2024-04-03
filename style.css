@@ -2,7 +2,7 @@
     font-family:'Times New Roman';
     font-weight: bold;
 }
-body{
+#body{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,4 +75,15 @@ body{
     color: whitesmoke;
     padding: 5px;
     border-radius: 25px;
+}
+#menu_admin{
+    display: flex;
+    background-color: grey;
+    color: whitesmoke;
+    letter-spacing: 10px;
+    justify-content: center;
+    border-bottom: 5px solid black;
+}
+#body_admin{
+    background-color: grey;
 }
