@@ -36,8 +36,8 @@
                 echo "oceny: " . "<br>" . 
                 "--------------------------------------------" . "<br>";
                 while($row = mysqli_fetch_assoc($rezultat)) {
-                  echo $row['ocena'] . "    |" . $row['opis'] . "| " . "     |" .  $row["przedmiot"] . "|   " . "nauczyciel: " . $row['nauczyciel'] . "|" . "<br>" .
-                  "--------------------------------------------" . "<br>";
+                  echo "<button type=text class='button_grades'> <a href='msg.php' class='a1'>" . $row['ocena'] . "    |" . $row['opis'] . "| " . "     |" .  $row["przedmiot"] . "|   " . "nauczyciel: " . $row['nauczyciel'] . "|" . "</a> </button>" . "<br>" .
+                  "--------------------------------------------". "<br>";
                 }
               }
         ?>

@@ -23,11 +23,6 @@ if($_SESSION['upr']!='admin'){
 
     <form action="admin.php" method="post">
         <label for="changeupr">komu chcesz zmienic uprawnienia?</label><br>
-        <select name="uprawnienia" id="uprawnienia">
-            <option value="admin">admin</option>
-            <option value="teacher">teacher</option>
-            <option value="user">user</option>
-        </select><br>
         <?php
             $host="localhost";
             $dbuser="root";
@@ -50,6 +45,11 @@ if($_SESSION['upr']!='admin'){
                 }; echo "</select>";
             };
         ?><br>
+        <select name="uprawnienia" id="uprawnienia">
+            <option value="admin">admin</option>
+            <option value="teacher">teacher</option>
+            <option value="user">user</option>
+        </select><br>
         <button type="submit">change</button><br>
     </form>
 

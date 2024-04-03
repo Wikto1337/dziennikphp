@@ -15,7 +15,6 @@ session_start();
         <input type="text" name="login" id="login" placeholder="login"><br>
         <input type="password" name="pass" id="pass" placeholder="password"><br>
         <input type="submit" value="LOGIN" id="guziklog"><br>
-        <p>if you dont have an account already <a href="rejestracja.php">sign in</a></p>
     </form>
     
     <?php

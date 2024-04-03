@@ -21,3 +21,8 @@ if($_SESSION['upr']=='admin'){
     echo "<a href='/dziennikphp/logout.php'>LOG OUT</a>";
 }
 ?>
+<?php
+if($_SESSION['upr']=='user'){
+    echo "<a href='/dziennikphp/logout.php'>LOG OUT</a>";
+}
+?>

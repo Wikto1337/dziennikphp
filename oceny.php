@@ -20,6 +20,7 @@ if($_SESSION['upr']!='admin' && $_SESSION['upr']!='teacher'){
         include './menu.php'
     ?>
     <form action="oceny.php" method="post">
+        <label for="grades">wstaw ocene</label>
         <select name="grades" id="grades">
             <option value="1">1</option>
             <option value="1+">1+</option>
@@ -91,5 +92,51 @@ if($_SESSION['upr']!='admin' && $_SESSION['upr']!='teacher'){
       }
     }
     ?>
+    <form action="oceny.php" method="post">
+        <label for="grades">zaktualizuj ocene</label>
+        <?php 
+        $host="localhost";
+        $dbuser="root";
+        $dbpassword="";
+        $dbname="project";
+
+        $conn=mysqli_connect($host,$dbuser,$dbpassword,$dbname);
+
+        if(!$conn){
+            die (mysqli_connect_error() . "error");
+        }
+        $odczytadmin = "SELECT login, ocena, przedmiot, opis FROM oceny";
+        $result = mysqli_query($conn, $odczytadmin);
+
+            if (mysqli_num_rows($result) > 0) {
+                echo "<select name='uczen_update' id='uczen_update'>";
+                while($row = mysqli_fetch_assoc($result)) {
+                    echo "<option>" . $row["login"] . "  |" . $row["ocena"] . "  |" . $row["przedmiot"] . "  |" . $row["opis"] . "|" ."</option>";
+                }; echo "</select>";
+            };
+
+        ?>
+        <select name="grades_update" id="grades_update">
+            <option value="1">1</option>
+            <option value="1+">1+</option>
+            <option value="2-">2-</option>
+            <option value="2">2</option>
+            <option value="2+">2+</option>
+            <option value="3-">3-</option>
+            <option value="3">3</option>
+            <option value="3+">3+</option>
+            <option value="4-">4-</option>
+            <option value="4">4</option>
+            <option value="4+">4+</option>
+            <option value="5-">5-</option>
+            <option value="5">5</option>
+            <option value="5+">5+</option>
+            <option value="6-">6-</option>
+            <option value="6">6</option>
+        </select><br>
+        <input type="text" name="opis" id="opis" placeholder="type an opis"><br>
+        <input type="text" name="przedmiot" id="przedmiot" placeholder="type a przedmiot"><br>
+        <button type="submit">wstaw</button>
+    </form> 
 </body>
 </html>
