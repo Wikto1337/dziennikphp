@@ -65,7 +65,7 @@ session_start();
 
         
 
-        $sql="INSERT INTO users(login,pass,upr) VALUES ('$log','$zaszyfrowane','user')";
+        $sql="INSERT INTO users(login, pass, upr, klasa) VALUES ('$log','$zaszyfrowane','$upr', '$class')";
         if(mysqli_query($conn,$sql)){
             echo "user added";
         } else echo "error";
